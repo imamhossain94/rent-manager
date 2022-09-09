@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.newage.rent_manager">
+    package="com.newagedevs.rent_manager">
    <application
         android:label="Rent Manager"
         android:name="${applicationName}"

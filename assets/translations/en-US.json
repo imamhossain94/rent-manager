@@ -1,0 +1,15 @@
+{
+  "app_name": "Rent Manager",
+  "quick_access":"Quick access",
+  "quick_access_msg":"Allows quick access to get access to your frequently accessed buildings. To edit the list, click on the edit button.",
+  "options":"Options",
+  "options_msg":"Here are the options available",
+  "manage_rent": "Manage rent",
+  "buildings": "Buildings",
+  "flats": "Flats",
+  "tenants": "Tenants",
+  "data_management": "Data Management",
+  "languages": "Languages"
+
+
+}
