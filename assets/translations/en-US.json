@@ -9,7 +9,12 @@
   "flats": "Flats",
   "tenants": "Tenants",
   "data_management": "Data Management",
-  "languages": "Languages"
+  "languages": "Languages",
+  "add_building": "Add building",
+  "add_buildings_helper_msg": "Here you can find the buildings you have added. If you want to add a new one, click on the button below.",
+  "edit_building": "Edit building",
+  "edit_building_helper_msg": "Click on a building to edit or delete it"
+
 
 
 }

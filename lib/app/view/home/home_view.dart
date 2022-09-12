@@ -3,9 +3,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rent_manager/app/view/buildings/buildings_view.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../controllers/language_controller.dart';
 import '../../../controllers/product_controller.dart';
 import '../../../global.dart';
 import '../../../models/product.dart';
@@ -24,144 +24,144 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<LanguageController>(
-        init: language,
-        builder: (controller) {
-          return Obx(() {
-            return Scaffold(
-              backgroundColor: color.background,
-              appBar: AppBar(
-                shadowColor: Colors.transparent.withOpacity(0.1),
-                elevation: 0,
-                surfaceTintColor: Colors.transparent,
-                backgroundColor: color.background,
-                bottom: PreferredSize(
-                  preferredSize: Size.fromHeight(0.sp),
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.sp, right: 12),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(left: 6.sp),
-                            child: Text(
-                              "Rant Manager",
-                              style: TextStyle(
-                                color: color.mainText,
-                                fontSize: 22.sp,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: 10.sp,
-                          ),
-                          Container(
-                            height: 21.sp,
-                            decoration: BoxDecoration(
-                                color: color.red,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(8))),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 5.sp),
-                                child: Text(
-                                  "Lite",
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 11.sp),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Expanded(child: Container()),
-                          Row(
-                            children: [
-                              IconButton(
-                                tooltip: controller.homeToolTip2,
-                                splashRadius: 22,
-                                icon: Icon(
-                                  (color.isDarkMode)
-                                      ? Icons.light_mode
-                                      : Icons.dark_mode,
-                                  color: color.secondText,
-                                  size: 20.sp,
-                                ),
-                                onPressed: () => color.changeTheme(),
-                              ),
-                            ],
-                          )
-                        ],
+    return Scaffold(
+      backgroundColor: color.background,
+      appBar: AppBar(
+        shadowColor: Colors.transparent.withOpacity(0.1),
+        elevation: 0,
+        surfaceTintColor: Colors.transparent,
+        backgroundColor: color.background,
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(0.sp),
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.sp, right: 12),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(left: 6.sp),
+                    child: Text(
+                      "Rant Manager",
+                      style: TextStyle(
+                        color: color.mainText,
+                        fontSize: 22.sp,
                       ),
                     ),
                   ),
-                ),
-              ),
-              body: Padding(
-                padding: EdgeInsets.only(right: 14.sp, left: 14.sp),
-                child: SingleChildScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  child: Column(
+                  SizedBox(
+                    width: 10.sp,
+                  ),
+                  Container(
+                    height: 21.sp,
+                    decoration: BoxDecoration(
+                        color: color.red,
+                        borderRadius:
+                        const BorderRadius.all(Radius.circular(8))),
+                    child: Align(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 5.sp),
+                        child: Text(
+                          "Lite",
+                          style: TextStyle(
+                              color: Colors.white, fontSize: 11.sp),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(child: Container()),
+                  Row(
                     children: [
-                      LineWidget(),
-                      Padding(
-                        padding: EdgeInsets.only(top: 8.sp, bottom: 5.sp),
-                        child: FadeInUp(
-                            duration: const Duration(milliseconds: 600),
-                            child: const SecondTextWidget("quick_access")),
-                      ),
-                      FadeInUp(
-                        duration: const Duration(milliseconds: 600),
-                        child: const SubTextWidget("quick_access_msg"),
-                      ),
-                      quickAccess(),
-                      FadeInUp(
-                          duration: const Duration(milliseconds: 500),
-                          child: LineWidget()),
-                      SizedBox(height: 5.sp),
-                      FadeInUp(
-                        duration: const Duration(milliseconds: 500),
-                        child: FadeInUp(
-                            duration: const Duration(milliseconds: 500),
-                            child: const SecondTextWidget("options")),
-                      ),
-                      SizedBox(height: 5.sp),
-                      FadeInUp(
-                        duration: const Duration(milliseconds: 500),
-                        child: const SubTextWidget("options_msg"),
-                      ),
-                      SizedBox(height: 5.sp),
-                      mainCustomButton(
-                        title: "manage_rent",
-                        icon: CupertinoIcons.collections,
-                      ),
-                      subCustomButton(
-                        title: "buildings",
-                        icon: CupertinoIcons.house_alt,
-                      ),
-                      subCustomButton(
-                        title: "flats",
-                        icon: CupertinoIcons.uiwindow_split_2x1,
-                      ),
-                      subCustomButton(
-                        title: "tenants",
-                        icon: CupertinoIcons.group,
-                      ),
-                      subCustomButton(
-                        title: "data_management",
-                        icon: CupertinoIcons.chart_pie,
-                      ),
-                      subCustomButton(
-                        title: "languages",
-                        icon: CupertinoIcons.globe,
+                      IconButton(
+                        tooltip: "Theme",
+                        splashRadius: 22,
+                        icon: Icon(
+                          (color.isDarkMode)
+                              ? Icons.light_mode
+                              : Icons.dark_mode,
+                          color: color.secondText,
+                          size: 20.sp,
+                        ),
+                        onPressed: () => color.changeTheme(),
                       ),
                     ],
-                  ),
-                ),
+                  )
+                ],
               ),
-            );
-          });
-        });
+            ),
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(right: 14.sp, left: 14.sp),
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              LineWidget(),
+              Padding(
+                padding: EdgeInsets.only(top: 8.sp, bottom: 5.sp),
+                child: FadeInUp(
+                    duration: const Duration(milliseconds: 600),
+                    child: const SecondTextWidget("quick_access")),
+              ),
+              FadeInUp(
+                duration: const Duration(milliseconds: 600),
+                child: const SubTextWidget("quick_access_msg"),
+              ),
+              quickAccess(),
+              FadeInUp(
+                  duration: const Duration(milliseconds: 500),
+                  child: LineWidget()),
+              SizedBox(height: 5.sp),
+              FadeInUp(
+                duration: const Duration(milliseconds: 500),
+                child: FadeInUp(
+                    duration: const Duration(milliseconds: 500),
+                    child: const SecondTextWidget("options")),
+              ),
+              SizedBox(height: 5.sp),
+              FadeInUp(
+                duration: const Duration(milliseconds: 500),
+                child: const SubTextWidget("options_msg"),
+              ),
+              SizedBox(height: 5.sp),
+              mainCustomButton(
+                title: "manage_rent",
+                icon: CupertinoIcons.collections,
+              ),
+              subCustomButton(
+                  title: "buildings",
+                  icon: CupertinoIcons.house_alt,
+                  onPressed: () {
+                    Get.to(() => BuildingsView(
+                        controller: productController),
+                      transition: Transition.cupertino,
+                    );
+                  }
+              ),
+              subCustomButton(
+                title: "flats",
+                icon: CupertinoIcons.uiwindow_split_2x1,
+              ),
+              subCustomButton(
+                title: "tenants",
+                icon: CupertinoIcons.group,
+              ),
+              subCustomButton(
+                title: "data_management",
+                icon: CupertinoIcons.chart_pie,
+              ),
+              subCustomButton(
+                title: "languages",
+                icon: CupertinoIcons.globe,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   // QuickAccess List of Buildings

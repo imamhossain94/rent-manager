@@ -26,6 +26,16 @@ class LineButtonWidget extends StatelessWidget {
       ),
       child: ElevatedButton(
         onPressed: function,
+        style: ElevatedButton.styleFrom(
+            //backgroundColor: background,
+            shadowColor: Colors.transparent.withOpacity(0.1),
+            //primary: Colors.transparent,
+            primary: background,
+            elevation: 0,
+            surfaceTintColor: Colors.transparent,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.sp), // <-- Radius
+            )),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 9.5.sp),
           child: Padding(
@@ -57,16 +67,6 @@ class LineButtonWidget extends StatelessWidget {
             ),
           ),
         ),
-        style: ElevatedButton.styleFrom(
-            //backgroundColor: background,
-            shadowColor: Colors.transparent.withOpacity(0.1),
-            //primary: Colors.transparent,
-            primary: background,
-            elevation: 0,
-            surfaceTintColor: Colors.transparent,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6.sp), // <-- Radius
-            )),
       ),
     );
   }
