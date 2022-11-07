@@ -1,38 +1,41 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'spice.dart';
+part of 'flat.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class SpiceAdapter extends TypeAdapter<Spice> {
+class FlatAdapter extends TypeAdapter<Flat> {
   @override
-  final int typeId = 1;
+  final int typeId = 2;
 
   @override
-  Spice read(BinaryReader reader) {
+  Flat read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Spice(
+    return Flat(
       id: fields[0] as String,
-      name: fields[1] as String,
-      quantity: fields[2] as double,
+      buildingId: fields[1] as String,
+      floorId: fields[2] as String,
+      name: fields[3] as String,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Spice obj) {
+  void write(BinaryWriter writer, Flat obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.name)
+      ..write(obj.buildingId)
       ..writeByte(2)
-      ..write(obj.quantity);
+      ..write(obj.floorId)
+      ..writeByte(3)
+      ..write(obj.name);
   }
 
   @override
@@ -41,7 +44,7 @@ class SpiceAdapter extends TypeAdapter<Spice> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is SpiceAdapter &&
+      other is FlatAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

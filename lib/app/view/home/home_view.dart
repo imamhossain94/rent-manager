@@ -6,19 +6,16 @@ import 'package:get/get.dart';
 import 'package:rent_manager/app/view/buildings/buildings_view.dart';
 import 'package:sizer/sizer.dart';
 
-import '../../../controllers/product_controller.dart';
 import '../../../global.dart';
-import '../../../models/product.dart';
-import '../../../screens/calculating/calculating_screen.dart';
-import '../../../screens/home/quick_access_screen.dart';
-import '../../../widgets/big_button_widget.dart';
-import '../../../widgets/line_button_widget.dart';
-import '../../../widgets/line_widget.dart';
-import '../../../widgets/second_text_widget.dart';
-import '../../../widgets/sub_text_widget.dart';
+import '../widgets/big_button_widget.dart';
+import '../widgets/line_button_widget.dart';
+import '../widgets/line_widget.dart';
+import '../widgets/second_text_widget.dart';
+import '../widgets/sub_text_widget.dart';
+import '../../viewmodel/building_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  ProductController productController = Get.put(ProductController());
+  BuildingController buildingController = Get.put(BuildingController());
 
   HomeScreen({Key? key}) : super(key: key);
 
@@ -136,7 +133,7 @@ class HomeScreen extends StatelessWidget {
                   icon: CupertinoIcons.house_alt,
                   onPressed: () {
                     Get.to(() => BuildingsView(
-                        controller: productController),
+                        controller: buildingController),
                       transition: Transition.cupertino,
                     );
                   }
@@ -184,10 +181,10 @@ class HomeScreen extends StatelessWidget {
                     duration: const Duration(milliseconds: 500),
                     child: BigButtonWidget(
                       onPressed: () {
-                        Get.to(
-                            () => QuickAccessScreen(
-                                productController: productController),
-                            transition: Transition.downToUp);
+                        // Get.to(
+                        //     () => QuickAccessScreen(
+                        //         productController: buildingController),
+                        //     transition: Transition.downToUp);
                       },
                       background: color.background,
                       isDotted: true,
@@ -209,67 +206,68 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(width: 10.sp),
-                  GetBuilder<ProductController>(builder: (cont) {
-                    if (cont.product.length == 0) {
+                  GetBuilder<BuildingController>(builder: (cont) {
+                    if (cont.building.length == 0) {
                       return const SizedBox.shrink();
                     } else {
                       return ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.horizontal,
-                          itemCount: cont.product.length,
+                          itemCount: cont.building.length,
                           itemBuilder: (context, index) {
-                            Product product = cont.product.getAt(index);
-                            if (product.isFavorite) {
-                              return FadeInRight(
-                                duration: Duration(
-                                    milliseconds: (600 + (index * 100))),
-                                child: Padding(
-                                  padding: EdgeInsets.only(right: 10.sp),
-                                  child: BigButtonWidget(
-                                    onPressed: () {
-                                      int index = cont.product.values
-                                          .toList()
-                                          .indexOf(product);
-                                      Get.to(
-                                          CalculatingScreen(
-                                            tabIndex: index,
-                                            productController:
-                                                productController,
-                                          ),
-                                          transition: Transition.cupertino);
-                                    },
-                                    background: color.flatButton,
-                                    isDotted: false,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          bottom: 10.sp,
-                                          right: 10.sp,
-                                          left: 10.sp,
-                                          top: 20.sp),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          SecondTextWidget(product.name),
-                                          SizedBox(height: 8.sp),
-                                          Align(
-                                            alignment: Alignment.bottomRight,
-                                            child: Icon(
-                                              Icons.navigate_next,
-                                              color: color.subArrow,
-                                              size: 20.sp,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              );
-                            } else {
-                              return const SizedBox.shrink();
-                            }
+                            return const SizedBox.shrink();
+                            //Product product = cont.building.getAt(index);
+                            // if (product.isFavorite) {
+                            //   return FadeInRight(
+                            //     duration: Duration(
+                            //         milliseconds: (600 + (index * 100))),
+                            //     child: Padding(
+                            //       padding: EdgeInsets.only(right: 10.sp),
+                            //       child: BigButtonWidget(
+                            //         onPressed: () {
+                            //           int index = cont.building.values
+                            //               .toList()
+                            //               .indexOf(product);
+                            //           // Get.to(
+                            //           //     CalculatingScreen(
+                            //           //       tabIndex: index,
+                            //           //       productController:
+                            //           //           buildingController,
+                            //           //     ),
+                            //           //     transition: Transition.cupertino);
+                            //         },
+                            //         background: color.flatButton,
+                            //         isDotted: false,
+                            //         child: Padding(
+                            //           padding: EdgeInsets.only(
+                            //               bottom: 10.sp,
+                            //               right: 10.sp,
+                            //               left: 10.sp,
+                            //               top: 20.sp),
+                            //           child: Column(
+                            //             mainAxisAlignment:
+                            //                 MainAxisAlignment.spaceBetween,
+                            //             children: [
+                            //               SecondTextWidget(product.name),
+                            //               SizedBox(height: 8.sp),
+                            //               Align(
+                            //                 alignment: Alignment.bottomRight,
+                            //                 child: Icon(
+                            //                   Icons.navigate_next,
+                            //                   color: color.subArrow,
+                            //                   size: 20.sp,
+                            //                 ),
+                            //               ),
+                            //             ],
+                            //           ),
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   );
+                            // } else {
+                            //   return const SizedBox.shrink();
+                            // }
                           });
                     }
                   }),

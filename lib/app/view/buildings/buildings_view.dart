@@ -2,25 +2,25 @@ import 'package:animate_do/animate_do.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sizer/sizer.dart';
 import 'package:get/get.dart';
+import 'package:rent_manager/app/viewmodel/building_controller.dart';
+import 'package:rent_manager/app/viewmodel/building_viewmodel.dart';
+import 'package:sizer/sizer.dart';
+import 'package:uuid/uuid.dart';
 
-import '../../../controllers/language_controller.dart';
-import '../../../controllers/product_controller.dart';
 import '../../../global.dart';
-import '../../../models/product.dart';
-import '../../../screens/products/products_add_screen.dart';
-import '../../../screens/products/products_edit_screen.dart';
-import '../../../widgets/line_button_widget.dart';
-import '../../../widgets/line_widget.dart';
-import '../../../widgets/main_text_widget.dart';
-import '../../../widgets/second_text_widget.dart';
-import '../../../widgets/sub_text_widget.dart';
+import '../../controllers/language_controller.dart';
+import '../../model/building.dart';
+import '../widgets/line_button_widget.dart';
+import '../widgets/line_widget.dart';
+import '../widgets/main_text_widget.dart';
+import '../widgets/second_text_widget.dart';
+import '../widgets/sub_text_widget.dart';
 import 'buildings_add.dart';
 
 class BuildingsView extends StatelessWidget {
   BuildingsView({Key? key, required this.controller}) : super(key: key);
-  ProductController controller;
+  BuildingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,6 @@ class BuildingsView extends StatelessWidget {
                 padding: EdgeInsets.only(top: 0.sp, right: 15.sp, left: 15.sp),
                 child: Column(
                   children: [
-
                     FadeInUp(
                       duration: const Duration(milliseconds: 500),
                       child: LineWidget(),
@@ -76,9 +75,14 @@ class BuildingsView extends StatelessWidget {
                       child: LineButtonWidget(
                         background: color.blue,
                         function: () {
+                          var uid = const Uuid().v1();
                           Get.to(
                               () => BuildingsAdd(
-                                    controller: controller,
+                                    controller: Get.put(
+                                        BuildingViewModel(
+                                          uid: uid,
+                                        ),
+                                        tag: uid),
                                   ),
                               transition: Transition.rightToLeft);
                         },
@@ -122,8 +126,8 @@ class BuildingsView extends StatelessWidget {
                     ),
                     SizedBox(height: 5.sp),
 
-                    GetBuilder<ProductController>(builder: (cont) {
-                      if (cont.product.length == 0) {
+                    GetBuilder<BuildingController>(builder: (cont) {
+                      if (cont.building.length == 0) {
                         return FadeInUp(
                           duration: Duration(milliseconds: 700),
                           child: Container(
@@ -139,27 +143,28 @@ class BuildingsView extends StatelessWidget {
                       } else {
                         return ListView.builder(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
-                            itemCount: cont.product.length,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemCount: cont.building.length,
                             itemBuilder: (context, index) {
-                              Product product = cont.product.getAt(index);
+
+                              Building building = cont.building.getAt(index);
                               return FadeInUp(
                                 duration:
                                     Duration(milliseconds: (index * 100 + 600)),
                                 child: LineButtonWidget(
                                   function: () {
-                                    Get.to(
-                                        () => ProductsEditScreen(
-                                              product: product,
-                                              controller: controller,
-                                            ),
-                                        transition: Transition.cupertino);
+                                    // Get.to(
+                                    //     () => ProductsEditScreen(
+                                    //           product: product,
+                                    //           controller: controller,
+                                    //         ),
+                                    //     transition: Transition.cupertino);
                                   },
                                   title: SizedBox(
                                     height: 25.sp,
                                     child: Align(
                                       alignment: Alignment.centerLeft,
-                                      child: Text(product.name,
+                                      child: Text(building.name,
                                           style: TextStyle(
                                             color: color.secondText,
                                             fontSize: 12.sp,
@@ -177,7 +182,6 @@ class BuildingsView extends StatelessWidget {
                             });
                       }
                     })
-
                   ],
                 ),
               ),

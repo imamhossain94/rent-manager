@@ -2,10 +2,12 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../global.dart';
+import '../../../global.dart';
+
+
 
 class BigButtonWidget extends StatelessWidget {
-  BigButtonWidget({
+  const BigButtonWidget({
     Key? key,
     required this.isDotted,
     required this.child,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
-import '../global.dart';
+import '../../../global.dart';
 
 class InputFieldWidget extends StatelessWidget {
   InputFieldWidget({
@@ -49,14 +49,14 @@ class InputFieldWidget extends StatelessWidget {
         labelStyle: TextStyle(color: color.subText),
         labelText: labelText,
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(color: color.subArrow, width: 1.5.sp),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(5),
           borderSide: BorderSide(
               color: color.subArrow,
-              width: 1.5.sp), //todo: mas legyen a szine mikor nem aktiv
+              width: 1.5.sp),
         ),
         suffixIcon: (secondLabelText == null)
             ? null

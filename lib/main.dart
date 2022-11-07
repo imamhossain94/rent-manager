@@ -4,11 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:rent_manager/app/model/building.dart';
+import 'package:rent_manager/app/model/flat.dart';
 import 'package:sizer/sizer.dart';
+import 'app/model/floor.dart';
 import 'app/view/home/home_view.dart';
 import 'global.dart';
-import 'models/product.dart';
-import 'models/spice.dart';
 
 
 void main() async {
@@ -18,11 +19,11 @@ void main() async {
   await GetStorage.init();
   await Hive.initFlutter();
 
-  Hive.registerAdapter(SpiceAdapter());
-  Hive.registerAdapter(ProductAdapter());
+  Hive.registerAdapter(BuildingAdapter());
+  Hive.registerAdapter(FloorAdapter());
+  Hive.registerAdapter(FlatAdapter());
 
-  await Hive.openBox<Product>('products');
-  quantity.onInit();
+  await Hive.openBox<Building>('buildings');
 
   runApp(
     EasyLocalization(
@@ -47,7 +48,7 @@ class MyApp extends StatelessWidget {
       return SimpleBuilder(builder: (_) {
         return GetMaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Spice',
+            title: 'Rent Manager',
             theme: color.currentTheme,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,

@@ -1,47 +1,42 @@
 
 import 'package:hive/hive.dart';
 
-import 'flat.dart';
+import 'floor.dart';
 
 part 'building.g.dart';
 
 @HiveType(typeId: 0)
 class Building extends HiveObject {
   @HiveField(0)
-  final String name;
+  final String id;
   @HiveField(1)
-  final double numberOfFloors;
+  late String name;
   @HiveField(2)
-  final double numberOfUnitsInEachFloor;
-
-  @HiveField(2)
-  final List<Flat> spices;
+  final List<Floor> floors;
   @HiveField(3)
   final bool isFavorite;
 
-
   Building({
+    required this.id,
     required this.name,
-    required this.quantity,
-    required this.spices,
+    required this.floors,
     required this.isFavorite,
   });
 
   Map<String, dynamic> toJson() {
     return {
+      'i': id,
       'n': name,
-      'q': quantity,
-      's': spices,
-      'i': isFavorite,
+      'f': floors,
+      'isf': isFavorite,
     };
   }
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    return Product(
+  factory Building.fromJson(Map<String, dynamic> json) {
+    return Building(
+        id: json['i'],
         name: json['n'],
-        quantity: json['q'],
-        spices:
-            (json['s'] as List).map((data) => Spice.fromJson(data)).toList(),
-        isFavorite: json['i']);
+        floors: (json['f'] as List).map((data) => Floor.fromJson(data)).toList(),
+        isFavorite: json['isf']);
   }
 }

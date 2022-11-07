@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sizer/sizer.dart';
 
-import '../global.dart';
+import '../../../global.dart';
 
 class LineWidget extends StatelessWidget {
   LineWidget({Key? key, this.text}) : super(key: key);
@@ -9,12 +9,12 @@ class LineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (text == null)
+    if (text == null) {
       return Divider(
         thickness: 1.sp,
         color: color.flatButton,
       );
-    else
+    } else {
       return Row(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -38,5 +38,6 @@ class LineWidget extends StatelessWidget {
           ),
         ],
       );
+    }
   }
 }
